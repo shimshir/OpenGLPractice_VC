@@ -27,7 +27,7 @@ SDL_Window* Display::createWindow() {
 
 SDL_GLContext Display::createContext() {
     m_context = SDL_GL_CreateContext(m_window);
-    SDL_GL_SetSwapInterval(1);
+    SDL_GL_SetSwapInterval(0);
 
     glewExperimental = GL_TRUE;
     GLenum result = glewInit();
