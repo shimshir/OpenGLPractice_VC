@@ -39,7 +39,7 @@ void Shader::createAndCompile() {
 
         glBindAttribLocation(m_program, 0, "position");
         glBindAttribLocation(m_program, 1, "texCoord");
-        glBindAttribLocation(m_program, 2, "normal");
+		glBindAttribLocation(m_program, 2, "normal");
 
         delete[] sources;
     }
@@ -48,6 +48,7 @@ void Shader::createAndCompile() {
 
 void Shader::linkAndUse() {
     glLinkProgram(m_program);
+	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
     glUseProgram(m_program);
 	for (GLuint& shader : m_shaders) {
 		glDetachShader(m_program, shader);
@@ -81,4 +82,10 @@ std::string Shader::readFile(std::string& filePath) {
         shaderFile.close();
     }
     return shaderSource;
+}
+void Shader::update(const Transform& transform)
+{
+	glm::mat4 modelMatrix = transform.getModelMatrix();
+
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &modelMatrix[0][0]);
 }

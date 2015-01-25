@@ -27,15 +27,15 @@ SDL_Window* Display::createWindow() {
 
 SDL_GLContext Display::createContext() {
     m_context = SDL_GL_CreateContext(m_window);
-    SDL_GL_SetSwapInterval(0);
+    SDL_GL_SetSwapInterval(1);
 
     glewExperimental = GL_TRUE;
     GLenum result = glewInit();
     if(result != GLEW_OK)
         std::cerr << "Glew failed to initialize!" << std::endl;
 
-    std::cout << "GL Version: " << glGetString(GL_VERSION) << std::endl;
-    std::cout << "GL Vendor: " << glGetString(GL_VENDOR) << std::endl;
+    std::cout << "GL Version: " << glGetString(GL_VERSION) << "\n";
+    std::cout << "GL Vendor: " << glGetString(GL_VENDOR) << "\n" << std::endl;
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);

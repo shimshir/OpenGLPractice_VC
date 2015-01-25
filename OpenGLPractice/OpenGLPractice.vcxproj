@@ -18,6 +18,8 @@
     <ClCompile Include="src\model.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\texture.cpp" />
+    <ClCompile Include="src\transform.cpp" />
+    <ClCompile Include="src\util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stb\stb_image.h" />
@@ -26,6 +28,8 @@
     <ClInclude Include="src\model.h" />
     <ClInclude Include="src\shader.h" />
     <ClInclude Include="src\texture.h" />
+    <ClInclude Include="src\transform.h" />
+    <ClInclude Include="src\util.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{896A02D2-092F-4D70-98CA-BDCE27B1846A}</ProjectGuid>

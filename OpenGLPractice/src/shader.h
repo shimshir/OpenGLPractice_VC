@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <glew.h>
+#include "transform.h"
 
 typedef int ShaderType;
 
@@ -17,17 +18,26 @@ public:
     void remove(ShaderType type, std::string shaderFilePath);
     void createAndCompile();
     void linkAndUse();
+	void update(const Transform& transform);
     virtual ~Shader();
 protected:
 private:
+	std::string readFile(std::string& filePath);
     std::map<ShaderType, std::vector<std::string>> m_shaderFilePaths;
     std::map<ShaderType, std::vector<std::string>> m_shaderSources;
     std::map<ShaderType, std::vector<GLint>> m_shaderSourcesLengths;
     std::vector<GLuint> m_shaders;
+	
     GLuint m_program;
-    std::string readFile(std::string& filePath);
-
     void load();
+
+	enum
+	{
+		TRANSFORM_U,
+
+		NUMBER_OF_UNIFORMS
+	};
+	GLuint m_uniforms[NUMBER_OF_UNIFORMS];
 };
 
 #endif // SHADER_H

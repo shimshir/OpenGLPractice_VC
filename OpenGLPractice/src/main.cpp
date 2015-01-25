@@ -6,6 +6,8 @@
 #include "model.h"
 #include "mesh.h"
 #include "texture.h"
+#include "transform.h"
+#include "util.h"
 
 int main(int argc, char *argv[]) {
     Display display("OpenGL", 800, 600);
@@ -35,23 +37,40 @@ int main(int argc, char *argv[]) {
 
     Mesh mesh(model);
 
+	Transform transform;
+
     SDL_Event windowEvent;
-    Uint32 lastTime = SDL_GetTicks();
-    Uint32 frameNumber = 0;
+	FrameCounter frameCounter;
+	Uint32 prev_ticks = SDL_GetTicks();
+	Uint32 curr_ticks = prev_ticks;
     while (true) {
         if (SDL_PollEvent(&windowEvent)) {
             if (windowEvent.type == SDL_QUIT || (windowEvent.type == SDL_KEYUP && windowEvent.key.keysym.sym == SDLK_ESCAPE))
                 break;
         }
-        display.clearColor(0.0, 0.0, 0.0, 1.0);
+        display.clearColor(0.0, 0.1, 0.3, 1.0);
+
+		transform.getPos().x = 0.5f * sinf(0.003f * curr_ticks);
+		transform.getPos().y = 0.5f * cosf(0.003f * curr_ticks);
+
+		transform.setScale((0.75f + 0.25f * sinf(0.003f * curr_ticks - (float)M_PI / 2)) * glm::vec3(1, 1, 1));
+
+		transform.getRot().x = 0.003f * curr_ticks;
+		transform.getRot().y = 0.003f * curr_ticks;
+		transform.getRot().z = 0.003f * curr_ticks;
+
+		shader.update(transform);
+
         mesh.draw();
         display.swapBuffers();
-        frameNumber++;
-        if (frameNumber > 1000) {
-            std::cout << 1000 * frameNumber / (SDL_GetTicks() - lastTime) << std::endl;
-            lastTime = SDL_GetTicks();
-            frameNumber = 0;
-        }
+
+		curr_ticks = SDL_GetTicks();
+		if (curr_ticks - prev_ticks > 2000)
+		{
+			frameCounter.showFramerate(curr_ticks - prev_ticks);
+			prev_ticks = curr_ticks;
+		}
+		frameCounter++;
     }
 	
     SDL_Quit();
