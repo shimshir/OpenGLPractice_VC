@@ -10,7 +10,7 @@
 #include "util.h"
 
 int main(int argc, char *argv[]) {
-    Display display("OpenGL", 800, 600);
+    Display display("OpenGL", 600, 600);
     display.init();
     display.createWindow();
     display.createContext();
@@ -26,18 +26,36 @@ int main(int argc, char *argv[]) {
 	texture.bind();
 
     std::vector<glm::vec3> positions = {
-										glm::vec3(-0.5f, -0.5f, 0.0f),
-                                        glm::vec3(0.5f, -0.5f, 0.0f),
-                                        glm::vec3(0.0f, 0.5f, 0.0f)
-									   };
+		// bottom
+		glm::vec3(0.0f, -0.25f, 0.5f),
+		glm::vec3(0.433f, -0.25f, -0.25f),
+		glm::vec3(-0.433f, -0.25f, -0.25f),
 
-    std::vector<GLuint> indices = {0, 1, 2};
+		glm::vec3(0.0f, -0.25f, 0.5f),
+		glm::vec3(0.433f, -0.25f, -0.25f),
+		glm::vec3(0.0f, 0.5f, 0.0f),
 
-	Model model(positions, { glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0) }, indices);
+		glm::vec3(0.0f, -0.25f, 0.5f),
+		glm::vec3(-0.433f, -0.25f, -0.25f),
+		glm::vec3(0.0f, 0.5f, 0.0f),
+
+		glm::vec3(0.433f, -0.25f, -0.25f),
+		glm::vec3(-0.433f, -0.25f, -0.25f),
+		glm::vec3(0.0f, 0.5f, 0.0f)
+	};
+
+	std::vector<GLuint> indices;
+	for (GLuint i = 0; i < positions.size(); i++) indices.push_back(i);
+
+	Model model(positions, { glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
+		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
+		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
+		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0) }, indices);
 
     Mesh mesh(model);
 
 	Transform transform;
+	const float speed_multiplier = 0.001f;
 
     SDL_Event windowEvent;
 	FrameCounter frameCounter;
@@ -48,16 +66,16 @@ int main(int argc, char *argv[]) {
             if (windowEvent.type == SDL_QUIT || (windowEvent.type == SDL_KEYUP && windowEvent.key.keysym.sym == SDLK_ESCAPE))
                 break;
         }
-        display.clearColor(0.0, 0.1, 0.3, 1.0);
+        display.clearColor(0.0f, 0.1f, 0.3f, 1.0f);
 
-		transform.getPos().x = 0.5f * sinf(0.003f * curr_ticks);
-		transform.getPos().y = 0.5f * cosf(0.003f * curr_ticks);
+		transform.getPos().x = 0.5f * sinf(speed_multiplier * curr_ticks);
+		transform.getPos().y = 0.5f * cosf(speed_multiplier * curr_ticks);
 
-		transform.setScale((0.75f + 0.25f * sinf(0.003f * curr_ticks - (float)M_PI / 2)) * glm::vec3(1, 1, 1));
+		transform.setScale((0.75f + 0.25f * sinf(speed_multiplier * curr_ticks - (float)M_PI / 2)) * glm::vec3(1, 1, 1));
 
-		transform.getRot().x = 0.003f * curr_ticks;
-		transform.getRot().y = 0.003f * curr_ticks;
-		transform.getRot().z = 0.003f * curr_ticks;
+		transform.getRot().x = speed_multiplier * curr_ticks;
+		transform.getRot().y = speed_multiplier * curr_ticks;
+		transform.getRot().z = speed_multiplier * curr_ticks;
 
 		shader.update(transform);
 
