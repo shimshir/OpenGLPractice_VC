@@ -2,8 +2,10 @@
 #define MESH_H
 
 #include <string>
+#include <iostream>
 #include "model.h"
 #include "glew.h"
+#include "stb_image.h"
 
 enum MeshBufferIndices {
     POSITION_VB,
@@ -16,14 +18,19 @@ enum MeshBufferIndices {
 
 class Mesh {
 public:
-    Mesh(const std::string& fileName);
-    Mesh(Model& model);
-    void draw();
-    virtual ~Mesh();
-protected:
+	Mesh(const std::string& obj_file_path);
+	Mesh(Model& model);
+	Mesh(Model& model, const std::string& texture_file_path);
+	void draw();
+	
+	virtual ~Mesh();
 private:
-    GLuint m_vao, m_vbo[NUMBER_OF_VERTEX_BUFFERS], m_ebo;
-    Model m_model;
+	GLuint m_vao, m_vbo[NUMBER_OF_VERTEX_BUFFERS], m_ebo;
+	GLuint m_texture;
+	Model m_model;
+
+	void initDataBuffers();
+	void initTexture(const std::string& texture_file_path);
 };
 
 #endif

@@ -5,7 +5,6 @@
 #include "shader.h"
 #include "model.h"
 #include "mesh.h"
-#include "texture.h"
 #include "transform.h"
 #include "util.h"
 
@@ -21,11 +20,26 @@ int main(int argc, char *argv[]) {
     shader.createAndCompile();
     shader.linkAndUse();
 
-	// TODO: needs to be adjusted to work for multiple textures (similar to the Shader class)
-	Texture texture("res/textures/paint.jpg");
-	texture.bind();
+    std::vector<glm::vec3> positions1 = {
+		// bottom
+		glm::vec3(0.0f, -0.25f, 0.5f),
+		glm::vec3(0.433f, -0.25f, -0.25f),
+		glm::vec3(-0.433f, -0.25f, -0.25f),
 
-    std::vector<glm::vec3> positions = {
+		glm::vec3(0.0f, -0.25f, 0.5f),
+		glm::vec3(0.433f, -0.25f, -0.25f),
+		glm::vec3(0.0f, 0.5f, 0.0f),
+
+		glm::vec3(0.0f, -0.25f, 0.5f),
+		glm::vec3(-0.433f, -0.25f, -0.25f),
+		glm::vec3(0.0f, 0.5f, 0.0f),
+
+		glm::vec3(0.433f, -0.25f, -0.25f),
+		glm::vec3(-0.433f, -0.25f, -0.25f),
+		glm::vec3(0.0f, 0.5f, 0.0f)
+	};
+
+	std::vector<glm::vec3> positions2 = {
 		// bottom
 		glm::vec3(0.0f, -0.25f, 0.5f),
 		glm::vec3(0.433f, -0.25f, -0.25f),
@@ -45,14 +59,20 @@ int main(int argc, char *argv[]) {
 	};
 
 	std::vector<GLuint> indices;
-	for (GLuint i = 0; i < positions.size(); i++) indices.push_back(i);
+	for (GLuint i = 0; i < positions1.size(); i++) indices.push_back(i);
 
-	Model model(positions, { glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
+	Model model1(positions1, { glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
 		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
 		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
 		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0) }, indices);
 
-    Mesh mesh(model);
+	Model model2(positions2, { glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
+		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
+		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
+		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0) }, indices);
+
+	Mesh mesh1(model1, "res/textures/paint.jpg");
+	Mesh mesh2(model2, "res/textures/bright-squares.png");
 
 	Transform transform;
 	const float speed_multiplier = 0.001f;
@@ -79,7 +99,21 @@ int main(int argc, char *argv[]) {
 
 		shader.update(transform);
 
-        mesh.draw();
+        mesh1.draw();
+
+		transform.getPos().x = 0.5f * cosf(2 * speed_multiplier * curr_ticks);
+		transform.getPos().y = 0.5f * sinf(2 * speed_multiplier * curr_ticks);
+
+		transform.setScale((0.75f + 0.25f * cosf(2 * speed_multiplier * curr_ticks - (float)M_PI / 2)) * glm::vec3(1, 1, 1));
+
+		transform.getRot().x = 2*speed_multiplier * curr_ticks;
+		transform.getRot().y = 2*speed_multiplier * curr_ticks;
+		transform.getRot().z = 2*speed_multiplier * curr_ticks;
+
+		shader.update(transform);
+
+		mesh2.draw();
+
         display.swapBuffers();
 
 		curr_ticks = SDL_GetTicks();
