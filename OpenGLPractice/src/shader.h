@@ -3,8 +3,9 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <glew.h>
+#include <glew/glew.h>
 #include "transform.h"
+#include "camera.h"
 
 typedef int ShaderType;
 
@@ -18,7 +19,7 @@ public:
     void remove(ShaderType type, std::string shaderFilePath);
     void createAndCompile();
     void linkAndUse();
-	void update(const Transform& transform);
+	void update(const Transform& transform, const Camera& camera);
     virtual ~Shader();
 protected:
 private:
@@ -34,7 +35,7 @@ private:
 	enum
 	{
 		TRANSFORM_U,
-
+		PROJECTION_U,
 		NUMBER_OF_UNIFORMS
 	};
 	GLuint m_uniforms[NUMBER_OF_UNIFORMS];

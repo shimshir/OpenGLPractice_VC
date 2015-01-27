@@ -31,6 +31,7 @@ SDL_GLContext Display::createContext() {
 
     glewExperimental = GL_TRUE;
     GLenum result = glewInit();
+
     if(result != GLEW_OK)
         std::cerr << "Glew failed to initialize!" << std::endl;
 

@@ -2,8 +2,8 @@
 #define DISPLAY_H
 #include <string>
 #include <iostream>
-#include <glew.h>
-#include <SDL.h>
+#include <glew/glew.h>
+#include <SDL2/SDL.h>
 
 class Display {
 public:
@@ -18,14 +18,16 @@ public:
     void clearColor(float r, float g, float b, float a);
     void swapBuffers();
     virtual ~Display();
+	SDL_Window* m_window;
+	SDL_GLContext m_context;
 protected:
 private:
     std::string m_title;
     int m_width;
     int m_height;
 
-    SDL_Window* m_window;
-    SDL_GLContext m_context;
+    
+    
 };
 
 #endif // DISPLAY_H

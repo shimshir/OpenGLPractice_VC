@@ -1,6 +1,6 @@
 #ifndef UTIL_H
 #define UTIL_H
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 class FrameCounter {
 public:

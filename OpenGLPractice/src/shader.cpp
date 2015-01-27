@@ -49,6 +49,7 @@ void Shader::createAndCompile() {
 void Shader::linkAndUse() {
     glLinkProgram(m_program);
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
+	m_uniforms[PROJECTION_U] = glGetUniformLocation(m_program, "projection");
     glUseProgram(m_program);
 	for (GLuint& shader : m_shaders) {
 		glDetachShader(m_program, shader);
@@ -83,9 +84,11 @@ std::string Shader::readFile(std::string& filePath) {
     }
     return shaderSource;
 }
-void Shader::update(const Transform& transform)
+void Shader::update(const Transform& transform, const Camera& camera)
 {
-	glm::mat4 modelMatrix = transform.getModelMatrix();
+	glm::mat4 model_matrix = transform.getModelMatrix();
+	glm::mat4 camera_projection_matrix = transform.getCameraMatrix(camera);
 
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &modelMatrix[0][0]);
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model_matrix[0][0]);
+	glUniformMatrix4fv(m_uniforms[PROJECTION_U], 1, GL_FALSE, &camera_projection_matrix[0][0]);
 }

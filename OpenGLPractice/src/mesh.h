@@ -4,8 +4,8 @@
 #include <string>
 #include <iostream>
 #include "model.h"
-#include "glew.h"
-#include "stb_image.h"
+#include "glew/glew.h"
+#include "stb/stb_image.h"
 
 enum MeshBufferIndices {
     POSITION_VB,

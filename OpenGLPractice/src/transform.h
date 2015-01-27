@@ -1,8 +1,9 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-#include <glm.hpp>
-#include <gtx/transform.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+#include "camera.h"
 
 class Transform
 {
@@ -27,6 +28,13 @@ public:
 		return posMatrix * rotMatrix * scaleMatrix;
 	}
 
+	inline glm::mat4 getCameraMatrix(const Camera& camera) const
+	{
+		glm::mat4 view_projection = camera.getViewProjection();
+		glm::mat4 model_matrix = getModelMatrix();
+		return view_projection * model_matrix;
+	}
+
 	inline glm::vec3& getPos() { return m_pos; }
 	inline glm::vec3& getRot() { return m_rot; }
 	inline glm::vec3& getScale() { return m_scale; }
@@ -34,6 +42,13 @@ public:
 	inline void setPos(glm::vec3& pos) { m_pos = pos; }
 	inline void setRot(glm::vec3& rot) { m_rot = rot; }
 	inline void setScale(glm::vec3& scale) { m_scale = scale; }
+
+	void operator=(Transform& transform)
+	{
+		m_pos = transform.getPos();
+		m_rot = transform.getRot();
+		m_scale = transform.getScale();
+	}
 private:
 	glm::vec3 m_pos;
 	glm::vec3 m_rot;
