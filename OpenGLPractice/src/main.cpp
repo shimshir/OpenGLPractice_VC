@@ -10,8 +10,8 @@
 #include "util.h"
 #include "camera.h"
 
-static const int DISPLAY_WIDTH = 800;
-static const int DISPLAY_HEIGHT = 600;
+static const int DISPLAY_WIDTH = 640;
+static const int DISPLAY_HEIGHT = 480;
 
 int main(int argc, char *argv[]) {
 	Display display("OpenGL", DISPLAY_WIDTH, DISPLAY_HEIGHT);
@@ -76,8 +76,8 @@ int main(int argc, char *argv[]) {
 		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
 		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0) }, indices);
 
-	Mesh mesh1(model1, "res/textures/paint_1.jpg");
-	Mesh mesh2(model2, "res/textures/paint_2.jpg");
+	Mesh mesh1(model1, "res/textures/tex1.jpg");
+	Mesh mesh2(model2, "res/textures/tex2.jpg");
 
 	Transform transform1;
 	Transform transform2;
@@ -104,8 +104,8 @@ int main(int argc, char *argv[]) {
 		transform1.getPos().y = 2 * sinf(2 * speed_multiplier * curr_ticks);
 		//transform1.getPos().z = sinf(2 * speed_multiplier * curr_ticks);
 
-		//transform1.getRot().x = 2 * speed_multiplier * curr_ticks;
-		transform1.getRot().y = 2 * speed_multiplier * curr_ticks;
+		transform1.getRot().x = 2 * speed_multiplier * curr_ticks;
+		//transform1.getRot().y = 2 * speed_multiplier * curr_ticks;
 		//transform1.getRot().z = 2 * speed_multiplier * curr_ticks;
 		//transform1.setScale(1.0f * glm::vec3(1.0f, 1.0f, 1.0f));
 

@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\stb\stb_image.c" />
+    <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\display.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mesh.cpp" />
