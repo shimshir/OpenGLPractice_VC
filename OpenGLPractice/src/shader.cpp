@@ -86,9 +86,9 @@ std::string Shader::readFile(std::string& filePath) {
 }
 void Shader::update(const Transform& transform, const Camera& camera)
 {
-	glm::mat4 model_matrix = transform.getModelMatrix();
-	glm::mat4 camera_projection_matrix = transform.getCameraMatrix(camera);
+	glm::mat4 transform_matrix = transform.getTransformMatrix();
+	glm::mat4 view_projection_matrix = camera.getViewProjection();
 
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model_matrix[0][0]);
-	glUniformMatrix4fv(m_uniforms[PROJECTION_U], 1, GL_FALSE, &camera_projection_matrix[0][0]);
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &transform_matrix[0][0]);
+	glUniformMatrix4fv(m_uniforms[PROJECTION_U], 1, GL_FALSE, &view_projection_matrix[0][0]);
 }

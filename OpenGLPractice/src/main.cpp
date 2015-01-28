@@ -10,8 +10,8 @@
 #include "util.h"
 #include "camera.h"
 
-static const int DISPLAY_WIDTH = 640;
-static const int DISPLAY_HEIGHT = 480;
+static const int DISPLAY_WIDTH = 800;
+static const int DISPLAY_HEIGHT = 600;
 
 int main(int argc, char *argv[]) {
 	Display display("OpenGL", DISPLAY_WIDTH, DISPLAY_HEIGHT);
@@ -100,15 +100,17 @@ int main(int argc, char *argv[]) {
 
 		camera.move();
 
-		transform1.getPos().x = 0.1f * cosf(2 * speed_multiplier * curr_ticks);
-		transform1.getPos().y = 0.1f * sinf(2 * speed_multiplier * curr_ticks);
-		transform1.getPos().z = 2 * sinf(speed_multiplier * curr_ticks);
+		transform1.getPos().x = 2 * cosf(2 * speed_multiplier * curr_ticks);
+		transform1.getPos().y = 2 * sinf(2 * speed_multiplier * curr_ticks);
+		//transform1.getPos().z = sinf(2 * speed_multiplier * curr_ticks);
 
-		transform1.getRot().x = 2 * speed_multiplier * curr_ticks;
+		//transform1.getRot().x = 2 * speed_multiplier * curr_ticks;
 		transform1.getRot().y = 2 * speed_multiplier * curr_ticks;
-		transform1.getRot().z = 2 * speed_multiplier * curr_ticks;
+		//transform1.getRot().z = 2 * speed_multiplier * curr_ticks;
+		//transform1.setScale(1.0f * glm::vec3(1.0f, 1.0f, 1.0f));
 
-		display.clearColor(0.0f, 0.1f, 0.3f, 1.0f);
+		display.clearColor(0.0f, 0.1f, 0.35f, 1.0f);
+		//display.clearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		shader.update(transform1, camera);
 		mesh1.draw();

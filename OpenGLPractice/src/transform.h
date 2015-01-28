@@ -15,7 +15,7 @@ public:
 		m_rot(rot),
 		m_scale(scale) {}
 
-	inline glm::mat4 getModelMatrix() const
+	inline glm::mat4 getTransformMatrix() const
 	{
 		glm::mat4 posMatrix = glm::translate(m_pos);
 		glm::mat4 rotXMatrix = glm::rotate(m_rot.x, glm::vec3(1, 0, 0));
@@ -25,14 +25,7 @@ public:
 
 		glm::mat4 rotMatrix = rotZMatrix * rotYMatrix * rotXMatrix;
 
-		return posMatrix * rotMatrix * scaleMatrix;
-	}
-
-	inline glm::mat4 getCameraMatrix(const Camera& camera) const
-	{
-		glm::mat4 view_projection = camera.getViewProjection();
-		glm::mat4 model_matrix = getModelMatrix();
-		return view_projection * model_matrix;
+		return posMatrix * rotMatrix  * scaleMatrix;
 	}
 
 	inline glm::vec3& getPos() { return m_pos; }
