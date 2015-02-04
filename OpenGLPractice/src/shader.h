@@ -34,8 +34,9 @@ private:
 
 	enum
 	{
-		TRANSFORM_U,
 		PROJECTION_U,
+		TRANSFORM_U,
+		LIGHT_DIRECTION_U,
 		NUMBER_OF_UNIFORMS
 	};
 	GLuint m_uniforms[NUMBER_OF_UNIFORMS];

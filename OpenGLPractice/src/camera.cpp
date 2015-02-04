@@ -2,7 +2,7 @@
 
 Camera::Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar) :
 m_init_pos(pos),
-m_init_forward(glm::vec3(0.0f, 0.0f, 1.0f)),
+m_init_forward(glm::vec3(0.0f, 0.0f, -1.0f)),
 m_init_up(glm::vec3(0.0f, 1.0f, 0.0f)),
 m_init_fov(fov),
 m_init_aspect(aspect),
@@ -107,10 +107,10 @@ void Camera::adjust(SDL_Event& windowEvent, SDL_Window* window)
 	}
 
 	if (windowEvent.type == SDL_MOUSEWHEEL && windowEvent.wheel.y < 0)
-		moveBackward(200 * m_move_speed);
+		moveBackward(50 * m_move_speed);
 
 	if (windowEvent.type == SDL_MOUSEWHEEL && windowEvent.wheel.y > 0)
-		moveForward(200 * m_move_speed);
+		moveForward(50 * m_move_speed);
 
 	// reset camera
 	if (windowEvent.type == SDL_KEYDOWN && windowEvent.key.keysym.sym == SDLK_r)
@@ -143,9 +143,9 @@ void Camera::move()
 	if (m_move_down)
 		moveDown(m_move_speed);
 	if (m_rotate_left)
-		rotateZ(-0.001f);
+		rotateZ(-0.005f);
 	if (m_rotate_right)
-		rotateZ(0.001f);
+		rotateZ(0.005f);
 }
 
 void Camera::reset()

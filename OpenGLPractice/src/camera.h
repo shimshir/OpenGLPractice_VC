@@ -58,7 +58,7 @@ private:
 	int m_mouse_position_x = 0, m_mouse_position_y = 0;
 
 	const float m_mouse_sensivity = 0.003f;
-	const float m_move_speed = 0.002f;
+	const float m_move_speed = 0.025f;
 };
 
 #endif //CAMERA_H

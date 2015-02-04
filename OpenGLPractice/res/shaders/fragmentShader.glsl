@@ -1,12 +1,13 @@
 #version 150
 
-uniform sampler2D sampler;
 varying vec2 texCoord0;
+varying vec3 normal0;
+
+uniform sampler2D sampler;
+uniform vec3 lightDirection;
 
 void main()
 {
-	if (texCoord0.x >= 0 && texCoord0.y >= 0)
-    	gl_FragColor = texture2D(sampler, texCoord0);
-    else
-    	gl_FragColor = vec4(0.0, 0.5, 0.0, 1.0);
+    gl_FragColor = texture2D(sampler, texCoord0);
 }
+// * clamp(dot(-lightDirection, normal0), 0.0, 1.0)
