@@ -92,5 +92,5 @@ void Shader::update(const Transform& transform, const Camera& camera)
 
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &transform_matrix[0][0]);
 	glUniformMatrix4fv(m_uniforms[PROJECTION_U], 1, GL_FALSE, &view_projection_matrix[0][0]);
-	//glUniform3f(m_uniforms[LIGHT_DIRECTION_U], 0.0f, -10.0f, 0.0f);
+	glUniform3f(m_uniforms[LIGHT_DIRECTION_U], 0.0f, -10.0f, 0.0f);
 }
