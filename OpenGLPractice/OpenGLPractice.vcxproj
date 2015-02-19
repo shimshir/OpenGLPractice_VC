@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\stb\stb_image.c" />
+    <ClCompile Include="src\assimp_wrapper.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\display.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -22,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stb\stb_image.h" />
+    <ClInclude Include="src\assimp_wrapper.h" />
     <ClInclude Include="src\camera.h" />
     <ClInclude Include="src\display.h" />
     <ClInclude Include="src\mesh.h" />
@@ -84,6 +86,7 @@
     <PostBuildEvent>
       <Command>cmd /c copy ".\lib\SDL2\SDL2.dll" "$(SolutionDir)$(Configuration)\"
 cmd /c copy ".\lib\glew\glew32.dll" "$(SolutionDir)$(Configuration)\"
+cmd /c copy ".\lib\assimp\Assimp32.dll" "$(SolutionDir)$(Configuration)\"
 cmd /c xcopy ".\res" "$(SolutionDir)$(Configuration)\res" /E /Y /I
 cmd echo "$(VC_SourcePath)"</Command>
     </PostBuildEvent>
@@ -110,6 +113,7 @@ cmd echo "$(VC_SourcePath)"</Command>
     <PostBuildEvent>
       <Command>cmd /c copy ".\lib\SDL2\SDL2.dll" "$(SolutionDir)$(Configuration)\"
 cmd /c copy ".\lib\glew\glew32.dll" "$(SolutionDir)$(Configuration)\"
+cmd /c copy ".\lib\assimp\Assimp32.dll" "$(SolutionDir)$(Configuration)\"
 cmd /c xcopy ".\res" "$(SolutionDir)$(Configuration)\res" /E /Y /I
 cmd echo "$(VC_SourcePath)"</Command>
     </PostBuildEvent>

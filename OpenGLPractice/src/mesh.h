@@ -25,7 +25,7 @@ public:
 	
 	virtual ~Mesh();
 private:
-	GLuint m_vao, m_vbo[NUMBER_OF_VERTEX_BUFFERS], m_ebo;
+	GLuint m_vao, m_vbo[NUMBER_OF_VERTEX_BUFFERS];
 	GLuint m_texture;
 	Model m_model;
 

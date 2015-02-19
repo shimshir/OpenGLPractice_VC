@@ -91,6 +91,6 @@ Mesh* getSkyBox()
 
 	}, indices);
 
-	Mesh *mesh = new Mesh(model, "res/textures/skybox/skybox.png");
+	Mesh *mesh = new Mesh(model, "res/textures/skybox/skybox.jpg");
 	return mesh;
 }
