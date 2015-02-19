@@ -28,6 +28,6 @@ void AssimpWrapper::processScene(const aiScene* scene) {
 
 }
 
-Mesh AssimpWrapper::getMesh() {
+Mesh* AssimpWrapper::getMesh() {
 	return nullptr;
 }

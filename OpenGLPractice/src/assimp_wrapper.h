@@ -9,10 +9,11 @@
 
 class AssimpWrapper {
 private:
+	Mesh* m_mesh;
 	void processScene(const aiScene* scene);
 public:
 	bool loadModelFile(const std::string& file_path);
-	Mesh getMesh();
+	Mesh* getMesh();
 };
 
 #endif

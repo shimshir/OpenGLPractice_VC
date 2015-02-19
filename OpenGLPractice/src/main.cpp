@@ -9,10 +9,7 @@
 #include "transform.h"
 #include "util.h"
 #include "camera.h"
-
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
+#include "assimp_wrapper.h"
 
 static const int DISPLAY_WIDTH = 640;
 static const int DISPLAY_HEIGHT = 480;
@@ -68,13 +65,13 @@ int main(int argc, char *argv[]) {
 	};
 
 	std::vector<glm::vec3> ground_positions = {
-		100.0f * glm::vec3(-1.0f, 0.0f, 1.0f),
-		100.0f * glm::vec3(1.0f, 0.0f, -1.0f),
-		100.0f * glm::vec3(-1.0f, 0.0f, -1.0f),
+		100.0f * glm::vec3(-1.0f, -0.2f, 1.0f),
+		100.0f * glm::vec3(1.0f, -0.2f, -1.0f),
+		100.0f * glm::vec3(-1.0f, -0.2f, -1.0f),
 
-		100.0f * glm::vec3(-1.0f, 0.0f, 1.0f),
-		100.0f * glm::vec3(1.0f, 0.0f, -1.0f),
-		100.0f * glm::vec3(1.0f, 0.0f, 1.0f)
+		100.0f * glm::vec3(-1.0f, -0.2f, 1.0f),
+		100.0f * glm::vec3(1.0f, -0.2f, -1.0f),
+		100.0f * glm::vec3(1.0f, -0.2f, 1.0f)
 	};
 
 	std::vector<GLuint> ground_indices = { 0, 1, 2, 4, 3, 5 };
