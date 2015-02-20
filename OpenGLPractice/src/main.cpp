@@ -10,7 +10,7 @@
 #include "util.h"
 #include "camera.h"
 #include "assimp_wrapper.h"
-
+// test
 static const int DISPLAY_WIDTH = 800;
 static const int DISPLAY_HEIGHT = 600;
 
