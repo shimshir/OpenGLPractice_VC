@@ -11,7 +11,7 @@
 class AssimpWrapper {
 private:
 	std::vector<Mesh*> m_meshes;
-	void processScene(const aiScene* scene);
+	void processScene(const aiScene* scene, const std::string& file_path);
 	bool loadModelFile(const std::string& file_path);
 public:
 	std::vector<Mesh*>& getMeshes(const std::string& file_path);

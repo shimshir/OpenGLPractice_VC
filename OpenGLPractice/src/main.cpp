@@ -11,8 +11,8 @@
 #include "camera.h"
 #include "assimp_wrapper.h"
 
-static const int DISPLAY_WIDTH = 640;
-static const int DISPLAY_HEIGHT = 480;
+static const int DISPLAY_WIDTH = 800;
+static const int DISPLAY_HEIGHT = 600;
 
 int main(int argc, char *argv[]) {
 	Display display("OpenGL", DISPLAY_WIDTH, DISPLAY_HEIGHT);
@@ -26,49 +26,17 @@ int main(int argc, char *argv[]) {
 	shader.createAndCompile();
 	shader.linkAndUse();
 
-	std::vector<glm::vec3> positions1 = {
-		// bottom
-		glm::vec3(0.0f, 0.0f, 0.5f),
-		glm::vec3(0.433f, 0.0f, -0.25f),
-		glm::vec3(-0.433f, 0.0f, -0.25f),
-
-		glm::vec3(0.0f, 0.0f, 0.5f),
-		glm::vec3(0.433f, 0.0f, -0.25f),
-		glm::vec3(0.0f, 0.75f, 0.0f),
-
-		glm::vec3(0.0f, 0.0f, 0.5f),
-		glm::vec3(-0.433f, 0.0f, -0.25f),
-		glm::vec3(0.0f, 0.75f, 0.0f),
-
-		glm::vec3(0.433f, 0.0f, -0.25f),
-		glm::vec3(-0.433f, 0.0f, -0.25f),
-		glm::vec3(0.0f, 0.75f, 0.0f)
-	};
-
-	
-
-	std::vector<GLuint> indices;
-	for (GLuint i = 0; i < positions1.size(); i++) indices.push_back(i);
-
-	Model model1(positions1, { glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
-		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
-		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0),
-		glm::vec2(0.0, 1.0), glm::vec2(1.0, 1.0), glm::vec2(0.5, 0.0) }, indices);
-	// -----------------------------------------------------------------------------------------------------
-	// -----------------------------------------------------------------------------------------------------
 
 	AssimpWrapper assimpWrapper;
-	std::vector<Mesh*> plane_meshes = assimpWrapper.getMeshes("res/models/boeing_747/B-747.obj");
+	std::vector<Mesh*> plane_meshes = assimpWrapper.getMeshes("res/models/Airbus_330/A-330.obj");
 	Transform my_obj_transform;
-
-	Mesh mesh1(model1, "res/textures/tex1.jpg");
 	Mesh *skybox_mesh = getSkyBox();
 
 	Transform transform1;
 	Transform skybox_transform;
-	skybox_transform.setScale(100.0f * glm::vec3(1, 1, 1));
+	skybox_transform.setScale(500.0f * glm::vec3(1, 1, 1));
 
-	Camera camera(glm::vec3(0.0f, 1.0f, 5.0f), 70.0f, DISPLAY_WIDTH / (float)DISPLAY_HEIGHT, 0.1f, 1000.0f);
+	Camera camera(glm::vec3(0.0f, 50.0f, 20.0f), 70.0f, DISPLAY_WIDTH / (float)DISPLAY_HEIGHT, 0.1f, 2000.0f);
 	float speed_multiplier = 0.001f;
 	SDL_Event event;
 	while (true)
@@ -88,13 +56,17 @@ int main(int argc, char *argv[]) {
 
 		display.clearColor(0.0f, 0.1f, 0.35f, 1.0f);
 
-		shader.update(skybox_transform, camera);
+		shader.update(skybox_transform, camera, 0);
 		skybox_mesh->draw();
 
-		shader.update(transform1, camera);
-		mesh1.draw();
+		my_obj_transform.setScale(glm::vec3(0.5, 0.5, 0.5));
+		my_obj_transform.getPos().y = 50;
+		glm::vec3 lightDirection;
+		lightDirection.x = cosf(speed_multiplier * SDL_GetTicks());
+		lightDirection.y = cosf(2 * speed_multiplier * SDL_GetTicks());
+		lightDirection.z = sinf(speed_multiplier * SDL_GetTicks());
 
-		shader.update(my_obj_transform, camera);
+		shader.update(my_obj_transform, camera, 1, lightDirection);
 		for (Mesh* mesh : plane_meshes)
 			mesh->draw();
 

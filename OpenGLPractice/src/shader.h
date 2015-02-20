@@ -19,7 +19,7 @@ public:
     void remove(ShaderType type, std::string shaderFilePath);
     void createAndCompile();
     void linkAndUse();
-	void update(const Transform& transform, const Camera& camera);
+	void update(const Transform& transform, const Camera& camera, const int useLighting = 1, const glm::vec3 lightDirection = glm::vec3(-1.0f, -1.0f, -1.0f));
     virtual ~Shader();
 protected:
 private:
@@ -37,6 +37,7 @@ private:
 		PROJECTION_U,
 		TRANSFORM_U,
 		LIGHT_DIRECTION_U,
+		USE_LIGHTING_U,
 		NUMBER_OF_UNIFORMS
 	};
 	GLuint m_uniforms[NUMBER_OF_UNIFORMS];

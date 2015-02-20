@@ -1,14 +1,38 @@
-newmtl bodySG
+newmtl a330_bodySG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd 747-color bar.jpg
-bump body-bump.jpg -bm 0.01
+map_Kd a330-color.jpg
+bump bodybump.jpg -bm 0.01
 Ni 1.50
-Ks 0.17 0.17 0.17
-Ns 20.63
-newmtl engineSG
+Ks 0.30 0.30 0.30
+Ns 62.00
+newmtl a330_body_blueSG
+illum 4
+Kd 0.02 0.09 0.78
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.37 0.37 0.37
+Ns 65.07
+newmtl a330_body_redSG
+illum 4
+Kd 0.78 0.01 0.01
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.25 0.25 0.25
+Ns 5.53
+newmtl a330_body_stuffSG
+illum 4
+Kd 0.78 0.78 0.78
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.30 0.30 0.30
+Ns 510.00
+newmtl a330_engineSG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -16,8 +40,8 @@ Tf 1.00 1.00 1.00
 map_Kd engine.jpg
 Ni 1.50
 Ks 0.50 0.50 0.50
-Ns 5.16
-newmtl engine_blackSG
+Ns 62.00
+newmtl a330_engine_blackSG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -25,16 +49,16 @@ Tf 1.00 1.00 1.00
 Ni 1.50
 Ks 0.00 0.00 0.00
 Ns 2046.00
-newmtl engine_metalSG
+newmtl a330_engine_metal_zylSG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd eng-back.jpg
+map_Kd eng-back_zyl.jpg
 Ni 1.50
 Ks 0.64 0.64 0.64
-Ns 3.20
-newmtl engine_rotorSG
+Ns 30.00
+newmtl a330_engine_rotorSG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -43,7 +67,7 @@ map_Kd rotor.jpg
 Ni 1.50
 Ks 0.38 0.38 0.38
 Ns 11.50
-newmtl engine_supportSG
+newmtl a330_engine_supportSG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -51,8 +75,8 @@ Tf 1.00 1.00 1.00
 map_Kd support.jpg
 Ni 1.50
 Ks 0.25 0.25 0.25
-Ns 1.11
-newmtl engine_trimSG
+Ns 62.00
+newmtl a330_engine_trimSG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -60,16 +84,8 @@ Tf 1.00 1.00 1.00
 map_Kd eng-steel.jpg
 Ni 1.50
 Ks 0.81 0.81 0.81
-Ns 1.71
-newmtl frameSG
-illum 4
-Kd 0.36 0.36 0.36
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.50
-Ks 0.31 0.31 0.31
-Ns 4.79
-newmtl gearSG
+Ns 126.00
+newmtl a330_gearSG
 illum 4
 Kd 0.70 0.70 0.70
 Ka 0.00 0.00 0.00
@@ -77,15 +93,15 @@ Tf 1.00 1.00 1.00
 Ni 1.50
 Ks 0.32 0.32 0.32
 Ns 11.50
-newmtl gear_chromeSG
+newmtl a330_gear_chromeSG
 illum 4
-Kd 0.13 0.13 0.13
-Ka 0.13 0.13 0.13
+Kd 0.41 0.41 0.41
+Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.50
 Ks 0.89 0.89 0.89
 Ns 44.69
-newmtl gear_tireSG
+newmtl a330_gear_tireSG
 illum 4
 Kd 0.24 0.24 0.24
 Ka 0.00 0.00 0.00
@@ -93,51 +109,51 @@ Tf 1.00 1.00 1.00
 Ni 1.50
 Ks 0.19 0.19 0.19
 Ns 4.79
-newmtl glassSG
+newmtl a330_glassSG
 illum 4
-Kd 0.54 0.54 0.54
+Kd 0.17 0.17 0.17
 Ka 0.00 0.00 0.00
 Tf 0.49 0.49 0.49
 Ni 1.50
 Ks 1.00 1.00 1.00
 Ns 24.76
-newmtl inside1SG
+newmtl a330_insideSG
 illum 4
-Kd 0.78 0.78 0.78
+Kd 0.59 0.59 0.59
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.50
 Ks 0.00 0.00 0.00
 Ns 2046.00
-newmtl insideSG
+newmtl a330_rubberSG
 illum 4
-Kd 0.78 0.78 0.78
+Kd 0.75 0.75 0.75
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.50
-Ks 0.00 0.00 0.00
-Ns 2046.00
-newmtl tailSG
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd color.jpg
-bump 747-tail-bump.jpg -bm 0.01
-Ni 1.50
-Ks 0.17 0.17 0.17
-Ns 20.63
-newmtl wingSG
+Ks 0.36 0.36 0.36
+Ns 6.77
+newmtl a330_tailSG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd color.jpg
-bump 747-wing-bump.jpg -bm 0.01
+map_Kd tailcolor.jpg
+bump tailbump.jpg -bm 0.01
 Ni 1.50
-Ks 0.17 0.17 0.17
-Ns 20.63
-newmtl wing_lightSG
+Ks 0.30 0.30 0.30
+Ns 62.00
+newmtl a330_wingSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd wingcolor.jpg
+bump wingbump.jpg -bm 0.01
+Ni 1.50
+Ks 0.30 0.30 0.30
+Ns 62.00
+newmtl a330_wing_lightSG
 illum 4
 Kd 0.78 0.78 0.71
 Ka 0.00 0.00 0.00

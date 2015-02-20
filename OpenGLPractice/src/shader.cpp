@@ -51,6 +51,7 @@ void Shader::linkAndUse() {
 	m_uniforms[PROJECTION_U] = glGetUniformLocation(m_program, "projection");
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
 	m_uniforms[LIGHT_DIRECTION_U] = glGetUniformLocation(m_program, "lightDirection");
+	m_uniforms[USE_LIGHTING_U] = glGetUniformLocation(m_program, "useLighting");
     glUseProgram(m_program);
 	for (GLuint& shader : m_shaders) {
 		glDetachShader(m_program, shader);
@@ -85,12 +86,13 @@ std::string Shader::readFile(std::string& filePath) {
     }
     return shaderSource;
 }
-void Shader::update(const Transform& transform, const Camera& camera)
+void Shader::update(const Transform& transform, const Camera& camera, const int useLighting, const glm::vec3 lighingDirection)
 {
 	glm::mat4 transform_matrix = transform.getTransformMatrix();
 	glm::mat4 view_projection_matrix = camera.getViewProjection();
 
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &transform_matrix[0][0]);
 	glUniformMatrix4fv(m_uniforms[PROJECTION_U], 1, GL_FALSE, &view_projection_matrix[0][0]);
-	glUniform3f(m_uniforms[LIGHT_DIRECTION_U], 0.0f, -10.0f, 0.0f);
+	glUniform3fv(m_uniforms[LIGHT_DIRECTION_U], 1, &lighingDirection[0]);
+	glUniform1i(m_uniforms[USE_LIGHTING_U], useLighting);
 }
