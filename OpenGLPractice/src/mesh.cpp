@@ -1,10 +1,6 @@
 #include "mesh.h"
 #include "assimp_wrapper.h"
 
-Mesh::Mesh(const std::string& obj_file_path) {
-
-}
-
 Mesh::Mesh(Model& model) {
 	m_model = model;
 	initDataBuffers();

@@ -1,4 +1,5 @@
 #include "assimp_wrapper.h"
+#include "glm/glm.hpp"
 
 bool AssimpWrapper::loadModelFile(const std::string& file_path) {
 
@@ -26,8 +27,29 @@ bool AssimpWrapper::loadModelFile(const std::string& file_path) {
 
 void AssimpWrapper::processScene(const aiScene* scene) {
 
+	for (int i = 0; i < scene->mNumMeshes; i++) {
+		aiMesh* ai_mesh = scene->mMeshes[i];
+		Model m_model;
+		for (int j = 0; j < ai_mesh->mNumFaces; j++) {
+			const aiFace& face = ai_mesh->mFaces[j];
+			for (int k = 0; k < 3; k++) {
+				aiVector3D pos = ai_mesh->mVertices[face.mIndices[k]];
+				//aiVector3D uv = mesh->mTextureCoords[0][face.mIndices[k]];
+				aiVector3D normal = ai_mesh->HasNormals() ? ai_mesh->mNormals[face.mIndices[k]] : aiVector3D(1.0f, 1.0f, 1.0f);
+
+				m_model.getPositions().push_back(glm::vec3(pos.x, pos.y, pos.z));
+				m_model.getTexCoords().push_back(glm::vec2(0, 0));
+				m_model.getNormals().push_back(glm::vec3(normal.x, normal.y, normal.z));
+			}
+		}
+		for (int q = 0; q < m_model.getPositions().size(); q++)
+			m_model.getIndices().push_back(q);
+		m_meshes.push_back(new Mesh(m_model));
+	}
+
 }
 
-Mesh* AssimpWrapper::getMesh() {
-	return nullptr;
+std::vector<Mesh*>& AssimpWrapper::getMeshes(const std::string& file_path) {
+	loadModelFile(file_path);
+	return m_meshes;
 }

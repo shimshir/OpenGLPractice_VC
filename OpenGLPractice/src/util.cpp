@@ -20,52 +20,60 @@ FrameCounter FrameCounter::operator++(int)
 
 Mesh* getSkyBox()
 {
-	float scale = 100.0f;
 	std::vector<glm::vec3> positions = {
 		// up
-		scale * glm::vec3(1.0f, 1.0f, 1.0f),
-		scale * glm::vec3(-1.0f, 1.0f, -1.0f),
-		scale * glm::vec3(1.0f, 1.0f, -1.0f),
+		glm::vec3(1.0f, 1.0f, 1.0f),
+		glm::vec3(-1.0f, 1.0f, -1.0f),
+		glm::vec3(1.0f, 1.0f, -1.0f),
 
-		scale * glm::vec3(1.0f, 1.0f, 1.0f),
-		scale * glm::vec3(-1.0f, 1.0f, -1.0f),
-		scale * glm::vec3(-1.0f, 1.0f, 1.0f),
+		glm::vec3(1.0f, 1.0f, 1.0f),
+		glm::vec3(-1.0f, 1.0f, -1.0f),
+		glm::vec3(-1.0f, 1.0f, 1.0f),
 
 		// front
-		scale * glm::vec3(-1.0f, 1.0f, 1.0f),
-		scale * glm::vec3(1.01f, -1.0f, 1.0f),
-		scale * glm::vec3(-1.0f, -1.0f, 1.0f),
+		glm::vec3(-1.0f, 1.0f, 1.0f),
+		glm::vec3(1.01f, -1.0f, 1.0f),
+		glm::vec3(-1.0f, -1.0f, 1.0f),
 
-		scale * glm::vec3(-1.0f, 1.0f, 1.0f),
-		scale * glm::vec3(1.01f, -1.0f, 1.0f),
-		scale * glm::vec3(1.01f, 1.0f, 1.0f),
+		glm::vec3(-1.0f, 1.0f, 1.0f),
+		glm::vec3(1.01f, -1.0f, 1.0f),
+		glm::vec3(1.01f, 1.0f, 1.0f),
 
 		//left 
-		scale * glm::vec3(1.0f, 1.0f, -1.0f),
-		scale * glm::vec3(1.0f, -1.0f, 1.0f),
-		scale * glm::vec3(1.0f, -1.0f, -1.0f),
+		glm::vec3(1.0f, 1.0f, -1.0f),
+		glm::vec3(1.0f, -1.0f, 1.0f),
+		glm::vec3(1.0f, -1.0f, -1.0f),
 
-		scale * glm::vec3(1.0f, 1.0f, -1.0f),
-		scale * glm::vec3(1.0f, -1.0f, 1.0f),
-		scale * glm::vec3(1.0f, 1.0f, 1.0f),
+		glm::vec3(1.0f, 1.0f, -1.0f),
+		glm::vec3(1.0f, -1.0f, 1.0f),
+		glm::vec3(1.0f, 1.0f, 1.0f),
 
 		//right
-		scale * glm::vec3(-1.0f, 1.0f, 1.0f),
-		scale * glm::vec3(-1.0f, -1.0f, -1.0f),
-		scale * glm::vec3(-1.0f, -1.0f, 1.0f),
+		glm::vec3(-1.0f, 1.0f, 1.0f),
+		glm::vec3(-1.0f, -1.0f, -1.0f),
+		glm::vec3(-1.0f, -1.0f, 1.0f),
 
-		scale * glm::vec3(-1.0f, 1.0f, 1.0f),
-		scale * glm::vec3(-1.0f, -1.0f, -1.0f),
-		scale * glm::vec3(-1.0f, 1.0f, -1.0f),
+		glm::vec3(-1.0f, 1.0f, 1.0f),
+		glm::vec3(-1.0f, -1.0f, -1.0f),
+		glm::vec3(-1.0f, 1.0f, -1.0f),
 
 		// back
-		scale * glm::vec3(-1.0f, 1.0f, -1.0f),
-		scale * glm::vec3(1.0f, -1.0f, -1.0f),
-		scale * glm::vec3(-1.0f, -1.0f, -1.0f),
+		glm::vec3(-1.0f, 1.0f, -1.0f),
+		glm::vec3(1.0f, -1.0f, -1.0f),
+		glm::vec3(-1.0f, -1.0f, -1.0f),
 
-		scale * glm::vec3(-1.0f, 1.0f, -1.0f),
-		scale * glm::vec3(1.0f, -1.0f, -1.0f),
-		scale * glm::vec3(1.0f, 1.0f, -1.0f)
+		glm::vec3(-1.0f, 1.0f, -1.0f),
+		glm::vec3(1.0f, -1.0f, -1.0f),
+		glm::vec3(1.0f, 1.0f, -1.0f),
+
+		// bottom
+		glm::vec3(1.0f, -1.0f, 1.0f),
+		glm::vec3(-1.0f, -1.0f, -1.0f),
+		glm::vec3(1.0f, -1.0f, -1.0f),
+
+		glm::vec3(1.0f, -1.0f, 1.0f),
+		glm::vec3(-1.0f, -1.0f, -1.0f),
+		glm::vec3(-1.0f, -1.0f, 1.0f)
 	};
 
 	std::vector<GLuint> indices;
@@ -87,7 +95,10 @@ Mesh* getSkyBox()
 		glm::vec2(0.25, 0.334), glm::vec2(0.5, 0.666), glm::vec2(0.5, 0.334),
 		// back texture coords
 		glm::vec2(0.5, 0.334), glm::vec2(0.75, 0.666), glm::vec2(0.5, 0.666),
-		glm::vec2(0.5, 0.334), glm::vec2(0.75, 0.666), glm::vec2(0.75, 0.334)
+		glm::vec2(0.5, 0.334), glm::vec2(0.75, 0.666), glm::vec2(0.75, 0.334),
+		// bottom texture coords
+		glm::vec2(0.001, 0.66), glm::vec2(0.249, 1.0), glm::vec2(0.001, 1.0),
+		glm::vec2(0.001, 0.66), glm::vec2(0.249, 1.0), glm::vec2(0.249, 0.66)
 
 	}, indices);
 

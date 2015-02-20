@@ -18,10 +18,10 @@ enum MeshBufferIndices {
 
 class Mesh {
 public:
-	Mesh(const std::string& obj_file_path);
 	Mesh(Model& model);
 	Mesh(Model& model, const std::string& texture_file_path);
 	void draw();
+	void setTexture(GLuint texture) { m_texture = texture; };
 	
 	virtual ~Mesh();
 private:
